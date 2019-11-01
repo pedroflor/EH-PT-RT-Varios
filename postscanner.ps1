@@ -1,0 +1,1 @@
+"Inicio de port scanning..."; date; 131..133 | % { $a = $_; write-host; write-host "192.168.200.$a"; 80,443,8080 | % {echo ((new-object Net.Sockets.TcpClient).Connect("192.168.200.$a",$_)) " >>> $_/tcp open"} 2>$null}; "`n"; date; "Finalizacion de port scanning"
