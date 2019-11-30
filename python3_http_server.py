@@ -5,12 +5,10 @@
 """
 
 
-
 ###
 ### Simple
 ###
 python -m SimpleHTTPServer 8000
-
 
 
 ###
@@ -19,11 +17,9 @@ python -m SimpleHTTPServer 8000
 python3 -c 'import http.server, socketserver; PORT = 8000; Handler = http.server.SimpleHTTPRequestHandler; httpd = socketserver.TCPServer(("", PORT), Handler); print("serving at port", PORT); httpd.serve_forever()'
 
 
-
 ###
 ### Multiple lines
 ###
-
 import SimpleHTTPServer
 import SocketServer
 
