@@ -4,7 +4,6 @@
 3) Convertir a .exe y ejecutar en un Windows SIN python.
 """
 
-
 ###
 ### Simple
 ###
