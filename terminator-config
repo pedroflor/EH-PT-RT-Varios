@@ -1,0 +1,74 @@
+[global_config]
+  extra_styling = False
+  scroll_tabbar = True
+  title_hide_sizetext = True
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  suppress_multiple_term_dialog = True
+[keybindings]
+  split_vert = <Primary><Shift>l
+  next_tab = <Primary>Right
+  prev_tab = <Primary>Left
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_6 = <Alt>6
+  switch_to_tab_7 = <Alt>7
+  switch_to_tab_8 = <Alt>8
+  switch_to_tab_9 = <Alt>9
+  switch_to_tab_10 = <Alt>0
+  group_all_toggle = <Shift><Super>g
+  edit_window_title = <Primary><Shift>F1
+  edit_tab_title = <Primary><Shift>F2
+  edit_terminal_title = <Primary><Shift>F3
+[profiles]
+  [[default]]
+    background_color = "#1e1e1e"
+    background_darkness = 0.81
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#eeeeec"
+    scrollback_infinite = True
+    use_system_font = False
+    copy_on_selection = True
+  [[Black-on-White]]
+    background_color = "#ffffff"
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#000000"
+    scrollback_infinite = True
+    use_system_font = False
+    copy_on_selection = True
+  [[Green-on-Black]]
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#00ff00"
+    scrollback_infinite = True
+    use_system_font = False
+    copy_on_selection = True
+  [[White-on-Black]]
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#ffffff"
+    scrollback_infinite = True
+    use_system_font = False
+    copy_on_selection = True
+  [[White-on-Gray]]
+    background_color = "#2e3436"
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#ffffff"
+    scrollback_infinite = True
+    use_system_font = False
+    copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
