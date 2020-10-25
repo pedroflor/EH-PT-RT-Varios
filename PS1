@@ -1,4 +1,4 @@
-# ParrotSec
+# OS: ParrotSec
 # ~/.bashrc
 # Dentro de la sección: case "$TERM" in
 
