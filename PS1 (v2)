@@ -1,3 +1,7 @@
+# ParrotSec
+# ~/.bashrc
+# Dentro de la sección: case "$TERM" in
+
     NORMAL="$(tput sgr0)"
     ICyan="\[\033[38;5;14m\]"
     Cyan="\[\033[38;5;6m\]"
