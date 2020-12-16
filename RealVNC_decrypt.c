@@ -1,3 +1,11 @@
+/*
+Instructions:
+1) Hardcode the encrypted password
+2) Compile and run.
+$ gcc -o RealVNC_decrypt RealVNC_decrypt.c && ./RealVNC_decrypt
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
