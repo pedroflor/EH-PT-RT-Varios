@@ -1,7 +1,7 @@
-# OS: ParrotSec
+# OS: ParrotSec/Kali
 # ~/.bashrc
 # Dentro de la sección: case "$TERM" in
-
+    # Author: Pedro Flor | pedro.flor at gmail.com | Ideas/code from ParrotSec & Kali ;)
     NORMAL="$(tput sgr0)"
     ICyan="\[\033[38;5;14m\]"
     Cyan="\[\033[38;5;6m\]"
@@ -17,6 +17,19 @@
     SYMBOL_PATH_SEPARATOR=" :: "
     SYMBL_SQUAREBRACKET_LEFT="["
     SYMBL_SQUAREBRACKET_RIGHT="]"
+    
+    PROMPT_SYMBOL="::"
+    if [ "$EUID" -eq 0 ]; then # Change icon for root user
+	PROMPT_SYMBOL="☠️ "
+    fi
 
-    export   PS1="\n\[$NORMAL\]${ICyan}${SYMBOL_GT}\[$NORMAL\]${Cyan}${SYMBOL_GT}\[$NORMAL\]${IWhite} [ ${DATE}, \t \[$NORMAL\]${IGreen}\u@\H\[$NORMAL\]${IWhite} ] :: \[$NORMAL\]${IWhite} [ \[$NORMAL\]${IBlue}\w\[$NORMAL\]${IWhite} ]\n"
+
+    export   PS1="\n\[$NORMAL\]${ICyan}${SYMBOL_GT}\[$NORMAL\]${Cyan}${SYMBOL_GT}\[$NORMAL\]${IWhite} [ ${DATE}, \t \[$NORMAL\]${IGreen}\u@\H\[$NORMAL\]${IWhite} ] ${PROMPT_SYMBOL} \[$NORMAL\]${IWhite}[ \[$NORMAL\]${IBlue}\w\[$NORMAL\]${IWhite} ]\n"
     export PS1=$PS1"\[$NORMAL\]${IRed}${SYMBOL_GT}\[$NORMAL\]${Red}${SYMBOL_GT}\[$NORMAL\]${IWhite} \[$(tput bold)\]\\$\[$NORMAL\] \[$NORMAL\]"
+
+
+
+
+### TMUX CONFIG
+#      .tmux.conf
+# ->   set-option -g default-shell "/bin/bash".
