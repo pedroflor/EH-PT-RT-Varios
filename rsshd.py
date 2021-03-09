@@ -11,8 +11,8 @@ import logging
 import subprocess
 import os
 
-PORT = 2222
-SERVER="216.128.128.126"
+PORT = 2221
+SERVER="1.2.3.4"
 SLEEP = 2
 USER = "pf"
 DAYS = 3
