@@ -14,7 +14,7 @@ import os
 PORT = 2221
 SERVER="127.0.0.1"
 SLEEP = 2
-USER = "pflor"
+USER = "remote_user"
 DAYS = 3
 COMMAND = ["ssh", "-N", "-R", str(PORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=" + str(DAYS*24*60), USER + "@" + SERVER]
 LOG_PATH = "/tmp/rsshd.log"
