@@ -32,4 +32,4 @@
 
 ### TMUX CONFIG
 #      .tmux.conf
-# ->   set-option -g default-shell "/bin/bash".
+# ->   set-option -g default-shell "/bin/bash"
