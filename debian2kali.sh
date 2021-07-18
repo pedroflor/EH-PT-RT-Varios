@@ -16,6 +16,6 @@ apt -y dist-upgrade
 apt -y autoremove --purge
 
 # Instalar software base
-apt -y install vim tmux bash-completion rlfe nmap ncat
+apt -y install vim tmux bash-completion rlfe nmap ncat sudo mlocate net-tools
 
 # Instalar software adicional (Revisar Google Docs)
