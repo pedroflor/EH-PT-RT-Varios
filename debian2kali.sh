@@ -18,6 +18,14 @@ apt -y dist-upgrade
 apt -y autoremove --purge
 
 # Instalar software base
-apt -y install vim tmux bash-completion rlfe nmap ncat sudo mlocate net-tools curl
+apt -y install vim tmux bash-completion rlfe nmap ncat sudo mlocate net-tools curl unzip htop
+
+# Swith to runlevel 3
+systemctl isolate multi-user.target
+systemctl set-default multi-user.target
+
+# Stop firewall
+systemctl stop ufw
+systemctl disable ufw
 
 # Instalar software adicional (Revisar Google Docs)
