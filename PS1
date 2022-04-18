@@ -24,7 +24,13 @@
     fi
 
 
-    export   PS1="\n\[$NORMAL\]${ICyan}${SYMBOL_GT}\[$NORMAL\]${Cyan}${SYMBOL_GT}\[$NORMAL\]${IWhite} [ ${DATE}, \t \[$NORMAL\]${IGreen}\u@\H\[$NORMAL\]${IWhite} ] ${PROMPT_SYMBOL} \[$NORMAL\]${IWhite}[ \[$NORMAL\]${IBlue}\w\[$NORMAL\]${IWhite} ]\n"
+    # Line 1
+    PS1="\n\[$NORMAL\]${ICyan}${SYMBOL_GT}\[$NORMAL\]${Cyan}${SYMBOL_GT}\[$NORMAL\]${IWhite} [ ${DATE}, \t - \[$NORMAL\]${IGreen}\u@\H\[$NORMAL\]${IWhite} ] \n"
+    # Line 2: ➤➤
+    PS1=$PS1"\[$NORMAL\]${IBlue}${SYMBOL_GT}\[$NORMAL\]${IBlue}${SYMBOL_GT}\[$NORMAL\]${IWhite}" #@" \[$(tput bold)\]\\$\[$NORMAL\] \[$NORMAL\]"
+    # Line 2: PATH
+    PS1=$PS1" \[$NORMAL\]${IWhite}[ \[$NORMAL\]${IBlue}\w\[$NORMAL\]${IWhite} ]\n"
+    # Line 3
     export PS1=$PS1"\[$NORMAL\]${IRed}${SYMBOL_GT}\[$NORMAL\]${Red}${SYMBOL_GT}\[$NORMAL\]${IWhite} \[$(tput bold)\]\\$\[$NORMAL\] \[$NORMAL\]"
 
 
