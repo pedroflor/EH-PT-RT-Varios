@@ -1,0 +1,50 @@
+{
+    "appliance_id": "0",
+    "name": "Appliance Template",
+    "category": "guest",
+    "description": "Appliance Template",
+    "vendor_name": "Appliance Template",
+    "vendor_url": "http://www.example.tld",
+    "product_name": "Appliance Template",
+    "registry_version": 5,
+    "status": "stable",
+    "availability": "free",
+    "maintainer": "Pedro Flor",
+    "maintainer_email": "pedro dot flor at gmail dot com",
+    "usage": "This is a simple appliance template. Create a new version based on it.",
+    "port_name_format": "eth{0}",
+    "qemu": {
+        "adapter_type": "virtio-net-pci",
+        "adapters": 1,
+        "ram": 4000,
+        "hda_disk_interface": "virtio",
+        "arch": "x86_64",
+        "cpus": 2,
+        "console_type": "spice",
+        "kvm": "require",
+        "options": "-boot menu=on,splash-time=15000"
+    },
+    "images": [
+        {
+            "filename": "installer.iso",
+            "version": "0",
+            "md5sum": "3a3716fef866e5c29a1c1ccfc94264b5",
+            "filesize": 0
+        },        
+        {
+            "filename": "hhdd.qcow2",
+            "version": "0",
+            "md5sum": "658c825441b9b3080ba00f9eec002eaa",
+            "filesize": 0
+        }
+    ],
+    "versions": [
+        {
+            "name": "0",
+            "images": {
+                "hda_disk_image": "hhdd.qcow2",
+                "cdrom_image": "installer.iso"
+            }
+        }
+    ]
+}
