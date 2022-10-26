@@ -30,7 +30,6 @@ def isOpen(ip,port):
 
 def daemon():
     while True:
-        time.sleep(SLEEP)
         if isOpen(SERVER, RPORT) == False:
             log_to_file("No existe SSH reverso activo")
             try:
@@ -40,6 +39,7 @@ def daemon():
                                capture_output=True)
             except:
                 log_to_file("No fue posible iniciar SSH reverso")
+        time.sleep(SLEEP)
                 
 
 def log_to_file(msg):
