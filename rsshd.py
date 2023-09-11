@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ## Autor: Pedro Flor
-## Version: 0.2
+## Version: 0.3
 
 ## Usar dentro de "tmux"
 
