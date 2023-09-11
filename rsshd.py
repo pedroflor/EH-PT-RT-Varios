@@ -15,8 +15,12 @@ PORT = 5522
 SERVER="155.138.209.42"
 SLEEP = 5
 USER = "pentester"
-DAYS = 30
-COMMAND = ["ssh", "-C", "-N", "-R", str(PORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=" + str(DAYS*24*60), USER + "@" + SERVER]
+### SSH Command: 
+# ssh -C -N -R 5544:localhost:22 -o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 user-VPS@IP-VPS
+#  -C => Compression
+#  -N => Do not execute a remote command. Useful for just forwarding ports.
+#  -R => Reverse tunnel
+COMMAND = ["ssh", "-C", "-N", "-R", str(PORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=2592000" , USER + "@" + SERVER]
 LOG_PATH = "/tmp/rsshd.log"
 
 def isOpen(ip,port):
@@ -44,7 +48,7 @@ def daemon():
                 
 
 def log_to_file(msg):
-    logging.basicConfig(filename=LOG_PATH, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %I:%M:%S %p')
+    logging.basicConfig(filename=LOG_PATH, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %I:%M:%S %p', filemode='a')
     logging.warning(msg)
 
 def banner():
