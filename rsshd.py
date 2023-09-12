@@ -12,9 +12,9 @@ import subprocess
 import os
 
 PORT = 5522
-SERVER="155.138.209.42"
+SERVER="IP-VPS"
 SLEEP = 5
-USER = "pentester"
+USER = "support"
 ### SSH Command: 
 # ssh -C -N -R 5544:localhost:22 -o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 user-VPS@IP-VPS
 #  -C => Compression
