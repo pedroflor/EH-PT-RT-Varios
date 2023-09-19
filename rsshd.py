@@ -44,8 +44,6 @@ def daemon():
             except:
                 log_to_file("No fue posible iniciar SSH reverso")
         time.sleep(SLEEP)
-        
-                
 
 def log_to_file(msg):
     logging.basicConfig(filename=LOG_PATH, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %I:%M:%S %p', filemode='a')
@@ -53,16 +51,13 @@ def log_to_file(msg):
 
 def banner():
     banner = "" + \
-        "____ ____ _  _ ____ ____ ____ ____    ____ ____ _  _ \n" + \
-        "|__/ |___ |  | |___ |__/ [__  |___    [__  [__  |__| \n" + \
-        "|  \ |___  \/  |___ |  \ ___] |___    ___] ___] |  | \n" + \
-        "\n" + \
-        "           No cerrar esta ventana!!!\n"
+        " _____ _____ _____    _____                 _ \n" + \
+        "|   __|   __|  |  |  |_   _|_ _ ___ ___ ___| |\n" + \
+        "|__   |__   |     |    | | | | |   |   | -_| |\n" + \
+        "|_____|_____|__|__|    |_| |___|_|_|_|_|___|_|"
     print(banner)
 
 def check_tmux():
-
-    
     banner = "" + \
         "                E R R O R !!! \n" + \
         "________  __       __  __    __  __    __ \n" + \
@@ -77,11 +72,6 @@ def check_tmux():
         "\n" + \
         "             EJECUTAR TMUX!!! \n" + \
         ""
-                                           
-                                           
-                                           
-
-
     
     try:
         os.environ['TMUX']
