@@ -23,6 +23,8 @@ USER = "support"
 COMMAND = ["ssh", "-C", "-N", "-R", str(PORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=2592000" , USER + "@" + SERVER]
 LOG_PATH = "/tmp/rsshd.log"
 
+
+def 
 def isOpen(ip,port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(SLEEP)
@@ -81,6 +83,9 @@ def check_tmux():
 
 if __name__ == "__main__":
     os.system("clear")
+    if isOpen(SERVER, PORT) == False:
+        print("Imposible conectar con el sistema remoto.")
+        exit()
     check_tmux()
     banner()
     daemon()
