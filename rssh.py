@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
 ## Autor: Pedro Flor
-## Version: 0.3
-
-## Usar dentro de "tmux"
+## Version: 0.4
 
 import socket
 import time
@@ -11,33 +9,33 @@ import logging
 import subprocess
 import os
 
-PORT = 5522
-SERVER="IP-VPS"
+LPORT = 5522
+SERVER="REMOTE-IP"
+RPORT = 22
 SLEEP = 5
-USER = "support"
+USER = "pentester"
+
 ### SSH Command: 
 # ssh -C -N -R 5544:localhost:22 -o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 user-VPS@IP-VPS
 #  -C => Compression
-#  -N => Do not execute a remote command. Useful for just forwarding ports.
+#  -N => Do not execute a remote command. Useful for just forwarding LPORTs.
 #  -R => Reverse tunnel
-COMMAND = ["ssh", "-C", "-N", "-R", str(PORT) + ":localhost:" + "22", "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=2592000" , USER + "@" + SERVER]
+
+COMMAND = ["ssh", "-C",  "-N", "-R", str(LPORT) + ":localhost:" + str(RPORT), "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=2592000" , USER + "@" + SERVER]
 LOG_PATH = "/tmp/rsshd.log"
 
-
-def 
-def isOpen(ip,port):
+def isOpen(ip,rport):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.settimeout(SLEEP)
     try:
-        s.connect((ip, int(port)))
+        s.connect((ip, int(rport)))
         return True
     except:
         return False
 
 def daemon():
     while True:
-        if isOpen(SERVER, PORT) == False:
-            log_to_file("No existe SSH reverso activo")
+        if isOpen(SERVER, LPORT) == False:
+            log_to_file("Imposible conectarse con servidor SSH!!!")
             try:
                 log_to_file("Iniciando SSH reverso")
                 subprocess.run(COMMAND, 
@@ -83,9 +81,15 @@ def check_tmux():
 
 if __name__ == "__main__":
     os.system("clear")
-    if isOpen(SERVER, PORT) == False:
-        print("Imposible conectar con el sistema remoto.")
-        exit()
+    # Verificar si el sistema remoto es alcanzable
+    if isOpen(SERVER, RPORT) == False:
+        print("\nImposible conectar con el sistema remoto!!!")
+        print(" * IP:  " + SERVER)
+        print(" * RPORT: " + str(RPORT))
+        exit(1)
+
+    # Verificar si se está ejecutando desde dentro de TMUX
     check_tmux()
     banner()
+    # Proceder a conectar
     daemon()
