@@ -40,11 +40,11 @@ def verify_socket(rhost, rport):
 
     
 def create_ssh_tunnel(lport, rhost, rport):
-    # Verificar si el sistema remoto es alcanzable
+    # Verify if the remote system is reachable
     if verify_socket(rhost, rport) == True:
         try:
             log_to_file("[Info]: Se procede a iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
-            # Instanciando proceso
+            # Starting process
             #subprocess.run(SSH_COMMAND_PROCESS, shell=False, capture_output=True)
             SSH_COMMAND_OS_SYSTEM = "ssh -C -N -R" + " " + str(lport) + ":localhost:22" + " " + "-o ServerAliveInterval=60 -o ServerAliveCountMax=2592000" + " " + RUSER + "@" + rhost + " " + "-p" + " " + str(rport)
             print("[Info]: Se procede a iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
@@ -53,8 +53,6 @@ def create_ssh_tunnel(lport, rhost, rport):
         except:
             return 1
     else:
-        # Registrar fallos/errores
-        
         time.sleep(SECS_TEST_SOCKETS)
 
 def daemon_ssh():
@@ -111,9 +109,9 @@ def check_tmux():
 
 if __name__ == "__main__":
     os.system("clear")
-    # Verificar si se está ejecutando desde dentro de TMUX
+    # Verify if TMUX is running
     check_tmux()
     banner()
-    # Proceder a conectar
+    # Create SSH tunnel and profit!!!
     daemon_ssh()
-    print("Fin....")
+    print("End....")
