@@ -12,7 +12,7 @@ import os
 LPORT = 60100       # Port to open on remote SSH server
 RHOST = "vultr"     # IP/Hostname of remote SSH server
 RPORT = 22          # Remote SSH port on remote SSH server (By default: TCP/22)
-RUSER = "support"
+RUSER = "tunnel"    # Usuario en VPN "SIN" shell real -> /bin/false
 SECS_TEST_SOCKETS = 5   # Seconds to wait to test socket
 SECS_RECONN_SSH = 5     # Seconds to wait to reconnect SSH
 
