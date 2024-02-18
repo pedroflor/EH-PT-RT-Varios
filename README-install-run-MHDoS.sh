@@ -1,12 +1,11 @@
 # Iniciar SSH a VPS
-ssh <IP> -l ddos
+ssh <IP> -l root
 
-# Cambiar a root y ejecutar
-sudo -i
+# Como root y ejecutar
 curl https://raw.githubusercontent.com/pedroflor/EH-PT-RT-Varios/master/setup-mhddos.sh | bash
 
 # Cambiar a usuario "ddos"
-exit
+su - ddos
 cd MHDDoS/
 > proxy.list
 
