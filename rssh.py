@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ## Autor: Pedro Flor
-## Version: 1.0
+## Version: 1.1
 
 import socket
 import time
@@ -9,9 +9,10 @@ import logging
 import subprocess
 import os
 
-LPORT = 60100       # Port to open on remote SSH server
+LPORT = 20100       # Port to open on remote SSH server
 RHOST = "vultr"     # IP/Hostname of remote SSH server
 RPORT = 22          # Remote SSH port on remote SSH server (By default: TCP/22)
+RPORT_VPS = 22      # Remote SSH port on remote SSH server (If not TCP/22)
 RUSER = "tunnel"    # Usuario en VPN "SIN" shell real -> /bin/false
 SECS_TEST_SOCKETS = 5   # Seconds to wait to test socket
 SECS_RECONN_SSH = 5     # Seconds to wait to reconnect SSH
@@ -24,7 +25,7 @@ SECS_RECONN_SSH = 5     # Seconds to wait to reconnect SSH
 #  -R => Reverse tunnel
 
 #SSH_COMMAND_PROCESS = ["ssh", "-C", "-R", str(LPORT) + ":localhost:" + str(RPORT), "-o", "ServerAliveInterval=60", "-o", "ServerAliveCountMax=2592000" , RUSER + "@" + RHOST]
-LOG_PATH = "/tmp/rssh.log"
+LOG_PATH = "/tmp/rssh.py.log"
 MAX_FAILS = 3
 
 def verify_socket(rhost, rport):
@@ -39,15 +40,15 @@ def verify_socket(rhost, rport):
         return False
 
     
-def create_ssh_tunnel(lport, rhost, rport):
+def create_ssh_tunnel(lport, rhost, rport, rport_vps):
     # Verify if the remote system is reachable
     if verify_socket(rhost, rport) == True:
         try:
             log_to_file("[Info]: Se procede a iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
             # Starting process
             #subprocess.run(SSH_COMMAND_PROCESS, shell=False, capture_output=True)
-            SSH_COMMAND_OS_SYSTEM = "ssh -C -N -R" + " " + str(lport) + ":localhost:22" + " " + "-o ServerAliveInterval=60 -o ServerAliveCountMax=2592000" + " " + RUSER + "@" + rhost + " " + "-p" + " " + str(rport)
-            print("[Info]: Se procede a iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
+            SSH_COMMAND_OS_SYSTEM = "ssh -C -N -R" + " " + str(lport) + ":localhost:22" + " " + "-o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 -o ExitOnForwardFailure=yes" + " " + RUSER + "@" + rhost + " " + "-p" + " " + str(rport_vps)
+            print("[Info]: Se procede a iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
             exit_status = os.system(SSH_COMMAND_OS_SYSTEM)
             return exit_status
         except:
@@ -60,17 +61,18 @@ def daemon_ssh():
     lport = LPORT
     rhost = RHOST
     rport = RPORT
+    rport_vps = RPORT_VPS
     while True:
-        if create_ssh_tunnel(lport, rhost, rport) != 0:
+        if create_ssh_tunnel(lport, rhost, rport, rport_vps) != 0:
             counter_fails = counter_fails + 1
-            log_to_file("[Error]: No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
+            log_to_file("[Error]: No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
             if counter_fails >= MAX_FAILS:
                 lport += 1
-                log_to_file("[Error]: No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
+                log_to_file("[Error]: No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
                 create_ssh_tunnel(lport, rhost, rport)
                 counter_fails = 0
         else:
-            log_to_file("[Info]: Se inicio SSH reverso exitosamente: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
+            log_to_file("[Info]: Se inicio SSH reverso exitosamente: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
         time.sleep(SECS_RECONN_SSH)
 
 def log_to_file(msg):
@@ -115,3 +117,4 @@ if __name__ == "__main__":
     # Create SSH tunnel and profit!!!
     daemon_ssh()
     print("End....")
+
