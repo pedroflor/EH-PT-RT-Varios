@@ -8,6 +8,8 @@ import time
 import logging
 import subprocess
 import os
+from datetime import datetime
+
 
 LPORT = 20100       # Port to open on remote SSH server
 RHOST = "vultr"     # IP/Hostname of remote SSH server
@@ -44,7 +46,7 @@ def create_ssh_tunnel(lport, rhost, rport, rport_vps):
     # Verify if the remote system is reachable
     if verify_socket(rhost, rport) == True:
         try:
-            log_to_file("[Info]: Se procede a iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
+            log_to_file("[Info]: Starting SSH tunnel: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_VPS)+">")
             # Starting process
             #subprocess.run(SSH_COMMAND_PROCESS, shell=False, capture_output=True)
             SSH_COMMAND_OS_SYSTEM = "ssh -C -N -R" + " " + str(lport) + ":localhost:22" + " " + "-o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 -o ExitOnForwardFailure=yes" + " " + RUSER + "@" + rhost + " " + "-p" + " " + str(rport_vps)
@@ -62,17 +64,25 @@ def daemon_ssh():
     rhost = RHOST
     rport = RPORT
     rport_vps = RPORT_VPS
+
+
+    # datetime object containing current date and time
+    now = datetime.now()
+   
+    # dd/mm/YY H:M:S
+    date_now = now.strftime("%d/%m/%Y %H:%M:%S")
+    
     while True:
         if create_ssh_tunnel(lport, rhost, rport, rport_vps) != 0:
             counter_fails = counter_fails + 1
-            log_to_file("[Error]: No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
+            log_to_file("[Error]: " + date_now + " No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
             if counter_fails >= MAX_FAILS:
                 lport += 1
-                log_to_file("[Error]: No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
+                log_to_file("[Error]: " + date_now + " No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
                 create_ssh_tunnel(lport, rhost, rport)
                 counter_fails = 0
         else:
-            log_to_file("[Info]: Se inicio SSH reverso exitosamente: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
+            log_to_file("[Info]: " + date_now + " Se inicio SSH reverso exitosamente: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
         time.sleep(SECS_RECONN_SSH)
 
 def log_to_file(msg):
