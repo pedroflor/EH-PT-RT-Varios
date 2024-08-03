@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Autor: Pedro Flor
-## Version: 1.1
+## Version: 1.1.1
 
 # Variables
 
@@ -53,7 +53,7 @@ function check_tmux() {
 function ssh_daemon() {
     while true
     do
-        echo "Starting 'autossh' on "$(date)
+        echo $(date)": Starting 'autossh' <RPORT=${RPORT}> <LPORT=${LPORT}> <RPORT_VPS=${RPORT_VPS}>"
         autossh -M 0 -C -N -R ${LPORT}:localhost:${RPORT} -o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 -o ExitOnForwardFailure=yes ${RUSER}@${RHOST} -p ${RPORT_VPS}
         sleep ${WAIT_RECONN}m
     done
