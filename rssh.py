@@ -46,7 +46,7 @@ def create_ssh_tunnel(lport, rhost, rport, rport_vps):
     # Verify if the remote system is reachable
     if verify_socket(rhost, rport) == True:
         try:
-            log_to_file("[Info]: Starting SSH tunnel: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_VPS)+">")
+            log_to_file("[Info]: Starting SSH tunnel: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
             # Starting process
             #subprocess.run(SSH_COMMAND_PROCESS, shell=False, capture_output=True)
             SSH_COMMAND_OS_SYSTEM = "ssh -C -N -R" + " " + str(lport) + ":localhost:22" + " " + "-o ServerAliveInterval=60 -o ServerAliveCountMax=2592000 -o ExitOnForwardFailure=yes" + " " + RUSER + "@" + rhost + " " + "-p" + " " + str(rport_vps)
@@ -79,7 +79,7 @@ def daemon_ssh():
             if counter_fails >= MAX_FAILS:
                 lport += 1
                 log_to_file("[Error]: " + date_now + " No fue posible iniciar SSH reverso: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
-                create_ssh_tunnel(lport, rhost, rport)
+                create_ssh_tunnel(lport, rhost, rport, rport_vps)
                 counter_fails = 0
         else:
             log_to_file("[Info]: " + date_now + " Se inicio SSH reverso exitosamente: <LPORT=" + str(lport) + ">" + " " + "<RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">" + "<RPORT_VPS=" + str(rport_vps)+">")
@@ -127,4 +127,3 @@ if __name__ == "__main__":
     # Create SSH tunnel and profit!!!
     daemon_ssh()
     print("End....")
-
