@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-## Autor: Pedro Flor
-## Version: 1.1
+## Autor: PiEf
+## Version: 1.2
 
 import socket
 import time
@@ -41,7 +41,7 @@ def verify_socket(rhost, rport):
         log_to_file("[Error]: Imposible establecer SOCKET TCP con el sistema remoto: <RHOST=" + rhost + ">" + " " + "<RPORT=" + str(rport)+">")
         return False
 
-    
+
 def create_ssh_tunnel(lport, rhost, rport, rport_vps):
     # Verify if the remote system is reachable
     if verify_socket(rhost, rport) == True:
@@ -68,10 +68,10 @@ def daemon_ssh():
 
     # datetime object containing current date and time
     now = datetime.now()
-   
+
     # dd/mm/YY H:M:S
     date_now = now.strftime("%d/%m/%Y %H:%M:%S")
-    
+
     while True:
         if create_ssh_tunnel(lport, rhost, rport, rport_vps) != 0:
             counter_fails = counter_fails + 1
@@ -101,18 +101,18 @@ def check_tmux():
     banner = "" + \
         "                E R R O R !!! \n" + \
         "________  __       __  __    __  __    __ \n" + \
-        "$$$$$$$$\ $$\      $$\ $$\   $$\ $$\   $$\  \n" + \
-        "\__$$  __|$$$\    $$$ |$$ |  $$ |$$ |  $$ | \n" + \
-        "   $$ |   $$$$\  $$$$ |$$ |  $$ |\$$\ $$  | \n" + \
-        "   $$ |   $$\$$\$$ $$ |$$ |  $$ | \$$$$  /  \n" + \
-        "   $$ |   $$ \$$$  $$ |$$ |  $$ | $$  $$<   \n" + \
-        "   $$ |   $$ |\$  /$$ |$$ |  $$ |$$  /\$$\  \n" + \
-        "   $$ |   $$ | \_/ $$ |\$$$$$$  |$$ /  $$ | \n" + \
-        "   \__|   \__|     \__| \______/ \__|  \__| \n" + \
+        "$$$$$$$$\\ $$\\      $$\\ $$\\   $$\\ $$\\   $$\\  \n" + \
+        "\\__$$  __|$$$\\    $$$ |$$ |  $$ |$$ |  $$ | \n" + \
+        "   $$ |   $$$$\\  $$$$ |$$ |  $$ |\\$$\\ $$  | \n" + \
+        "   $$ |   $$\\$$\\$$ $$ |$$ |  $$ | \\$$$$  /  \n" + \
+        "   $$ |   $$ \\$$$  $$ |$$ |  $$ | $$  $$<   \n" + \
+        "   $$ |   $$ |\\$  /$$ |$$ |  $$ |$$  /\\$$\\  \n" + \
+        "   $$ |   $$ | \\_/ $$ |\\$$$$$$  |$$ /  $$ | \n" + \
+        "   \\__|   \\__|     \\__| \\______\\/ \\__|  \\__| \n" + \
         "\n" + \
         "             EJECUTAR TMUX!!! \n" + \
         ""
-    
+
     try:
         os.environ['TMUX']
     except:
@@ -120,7 +120,7 @@ def check_tmux():
         exit(1)
 
 if __name__ == "__main__":
-    os.system("clear")
+    #os.system("clear")
     # Verify if TMUX is running
     check_tmux()
     banner()
