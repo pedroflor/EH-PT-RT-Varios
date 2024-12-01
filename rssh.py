@@ -15,10 +15,10 @@ import time
 
 
 LPORT = 20100               # Port to open on remote SSH server
-RHOST = "216.238.120.27"    # IPv4 of remote SSH server (Important: Use IPv4 ONLY !!!)
+RHOST = "216.215.215.216"   # IPv4 of remote SSH server (Important: Use IPv4 ONLY !!!)
 RPORT = 22                  # Remote SSH port on remote SSH server (By default: TCP/22)
 RPORT_VPS = 22              # Remote SSH port on remote SSH server (If not TCP/22)
-RUSER = "tunnel"            # Usuario en VPN "SIN" shell real -> /bin/false
+RUSER = "tunnel_user"       # Usuario en VPN "SIN" shell real -> /bin/false
 SECS_TEST_SOCKETS = 5       # Seconds to wait to test socket
 SECS_RECONN_SSH = 5         # Seconds to wait to reconnect SSH
 MAX_FAILS = 5
