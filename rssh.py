@@ -14,11 +14,11 @@ import subprocess
 import time
 
 
-LPORT = 20100               # Port to open on remote SSH server
-RHOST = "216.215.215.216"   # IPv4 of remote SSH server (Important: Use IPv4 ONLY !!!)
-RPORT = 22                  # Remote SSH port on remote SSH server (By default: TCP/22)
-RPORT_VPS = 22              # Remote SSH port on remote SSH server (If not TCP/22)
-RUSER = "tunnel_user"       # Usuario en VPN "SIN" shell real -> /bin/false
+LPORT = <20123>             # Port to open on remote SSH server Reverse Tunnel
+RHOST = "<1.2.3.4>"         # IPv4 of remote SSH server (Important: Use IPv4 ONLY !!!)
+RPORT = 22                  # Remote SSH port on remote SSH server (Default: TCP/22)
+RPORT_VPS = 22              # Remote SSH port on remote SSH server (Default: TCP/22)
+RUSER = "<TUNNEL_USER>"     # User for tunneling
 SECS_TEST_SOCKETS = 5       # Seconds to wait to test socket
 SECS_RECONN_SSH = 5         # Seconds to wait to reconnect SSH
 MAX_FAILS = 5
